@@ -65,9 +65,19 @@ python -m pytest
 
 | Metric | Value |
 |---|---|
-| MAE on unseen races (leave-races-out CV) | 4.380 |
-| Races in training set | *Will fill in* |
-| Clean laps after filtering | *Will fill in* |
+| MAE on unseen races (leave-races-out CV) | **4.380 s** |
+| Races in training set | **10** |
+| Clean racing laps after filtering | **9,371** |
+
+This number is deliberately pessimistic: in leave-races-out CV the held-out circuit was never
+seen in training, so the model cannot know that track's base lap time — which alone varies by
+tens of seconds between circuits. Most of the 4.4 s is unknown-circuit baseline, not tyre
+modelling error. A random train/test split would report a far lower (and misleading) number by
+leaking same-race laps into training; I chose to publish the honest one.
+
+For the strategy simulator this baseline error cancels out entirely: strategies are always
+compared **within the same circuit**, so only relative effects — degradation slope per compound,
+fuel burn, temperature — decide the ranking, and those are what the model transfers across races.
 
 ## Design decisions
 
