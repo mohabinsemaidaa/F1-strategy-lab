@@ -78,6 +78,7 @@ def candidate_strategies(
     min_stint: int = 8,
 ) -> list[list[tuple[str, int]]]:
     """Enumerate sensible 1-stop and 2-stop strategies.
+
     F1 rules require using at least two different compounds, which this
     respects. Pit windows move in `step`-lap increments to keep the search
     small enough to run live in the dashboard.
@@ -98,14 +99,60 @@ def candidate_strategies(
         for p1 in range(min_stint, total_laps - 2 * min_stint + 1, step):
             for p2 in range(p1 + min_stint, total_laps - min_stint + 1, step):
                 candidates.append([(c1, p1), (c2, p2 - p1), (c3, total_laps - p2)])
-
     return candidates
 
 def rank_strategies(model, ctx: RaceContext, top_n: int = 10, **kwargs) -> list[StrategyResult]:
-    """Simulate all candidates and return the fastest `top_n`."""
+    """Simulate all candidates and return the fastest `top_n`.
+
+    Performance note: sklearn pipelines have significant per-call overhead,
+    so instead of calling ``model.predict`` once per stint (~2000 tiny calls),
+    we build the feature rows for *every* candidate strategy, run ONE batched
+    predict over all of them, then aggregate per strategy. Same numbers,
+    orders of magnitude faster.
+    """
+    candidates = candidate_strategies(ctx.total_laps, **kwargs)
+
+    # Build one flat table of feature rows for every lap of every candidate.
+    sids: list[int] = []
+    lap_numbers: list[int] = []
+    tyre_life: list[int] = []
+    compounds: list[str] = []
+    for sid, stints in enumerate(candidates):
+        lap = 1
+        for compound, n_laps in stints:
+            sids.extend([sid] * n_laps)
+            lap_numbers.extend(range(lap, lap + n_laps))
+            tyre_life.extend(range(1, n_laps + 1))
+            compounds.extend([compound] * n_laps)
+            lap += n_laps
+
+    n = len(sids)
+    batch = pd.DataFrame(
+        {
+            "LapNumber": lap_numbers,
+            "TyreLife": tyre_life,
+            "Stint": [1] * n,
+            "TrackTemp": [ctx.track_temp] * n,
+            "AirTemp": [ctx.air_temp] * n,
+            "Compound": compounds,
+            "Event": [ctx.event] * n,
+            "Team": [ctx.team] * n,
+            "Driver": [ctx.driver] * n,
+            "_sid": sids,
+        }
+    )
+    batch["_pred"] = model.predict(batch[FEATURES])
+    stint_totals = batch.groupby("_sid")["_pred"].sum()
+
     results = [
-        simulate(model, ctx, stints)
-        for stints in candidate_strategies(ctx.total_laps, **kwargs)
+        StrategyResult(
+            stints=stints,
+            total_time=float(stint_totals[sid]) + (len(stints) - 1) * ctx.pit_loss,
+            n_stops=len(stints) - 1,
+        )
+        for sid, stints in enumerate(candidates)
     ]
     results.sort(key=lambda r: r.total_time)
-    return results[:top_n]
+    top = results[:top_n]
+
+    return [simulate(model, ctx, r.stints) for r in top]

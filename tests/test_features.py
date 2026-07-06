@@ -17,8 +17,11 @@ def make_raw_laps() -> pd.DataFrame:
         "FreshTyre": [True] + [False] * 5,
         "TrackStatus": ["1", "1", "1", "1", "1", "4"],  # lap 6 = safety car
         "IsAccurate": [True] * 6,
-        "PitInTime": [pd.NaT] * 4 + [pd.Timedelta(seconds=1)] + [pd.NaT],  # lap 5 pits
-        "PitOutTime": [pd.NaT] * 6,
+        "PitInTime": pd.Series(
+            [pd.NaT] * 4 + [pd.Timedelta(seconds=1)] + [pd.NaT], # lap 5 pits
+            dtype="timedelta64[ns]",
+        ),
+        "PitOutTime": pd.Series([pd.NaT] * 6, dtype="timedelta64[ns]"),
         "Event": ["Bahrain Grand Prix"] * 6,
         "TrackTemp": [35.0] * 6,
         "AirTemp": [25.0] * 6,
