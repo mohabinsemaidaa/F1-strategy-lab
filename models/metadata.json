@@ -1,0 +1,70 @@
+{
+  "events": [
+    "Australian Grand Prix",
+    "Bahrain Grand Prix",
+    "Canadian Grand Prix",
+    "Chinese Grand Prix",
+    "Emilia Romagna Grand Prix",
+    "Japanese Grand Prix",
+    "Miami Grand Prix",
+    "Monaco Grand Prix",
+    "Saudi Arabian Grand Prix",
+    "Spanish Grand Prix"
+  ],
+  "teams": [
+    "Alpine",
+    "Aston Martin",
+    "Ferrari",
+    "Haas F1 Team",
+    "Kick Sauber",
+    "McLaren",
+    "Mercedes",
+    "Racing Bulls",
+    "Red Bull Racing",
+    "Williams"
+  ],
+  "drivers": [
+    "ALB",
+    "ALO",
+    "ANT",
+    "BEA",
+    "BOR",
+    "COL",
+    "DOO",
+    "GAS",
+    "HAD",
+    "HAM",
+    "HUL",
+    "LAW",
+    "LEC",
+    "NOR",
+    "OCO",
+    "PIA",
+    "RUS",
+    "SAI",
+    "STR",
+    "TSU",
+    "VER"
+  ],
+  "compounds": [
+    "HARD",
+    "INTERMEDIATE",
+    "MEDIUM",
+    "SOFT",
+    "nan"
+  ],
+  "median_track_temp": 37.9,
+  "median_air_temp": 25.2,
+  "total_laps_by_event": {
+    "Australian Grand Prix": 57,
+    "Bahrain Grand Prix": 57,
+    "Canadian Grand Prix": 70,
+    "Chinese Grand Prix": 56,
+    "Emilia Romagna Grand Prix": 63,
+    "Japanese Grand Prix": 53,
+    "Miami Grand Prix": 57,
+    "Monaco Grand Prix": 78,
+    "Saudi Arabian Grand Prix": 50,
+    "Spanish Grand Prix": 66
+  }
+}
