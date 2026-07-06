@@ -18,4 +18,5 @@ venv/
 .idea/
 
 # Large regenerable artifacts (uncomment if your model file is big)
-# models/*.joblib*.egg-info/
+# models/*.joblib
+*.egg-info/
