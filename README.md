@@ -65,9 +65,9 @@ python -m pytest
 
 | Metric | Value |
 |---|---|
-| MAE on unseen races (leave-races-out CV) | *fill in after training* |
-| Races in training set | *fill in* |
-| Clean laps after filtering | *fill in* |
+| MAE on unseen races (leave-races-out CV) | *Will fill in after training* |
+| Races in training set | *Will fill in* |
+| Clean laps after filtering | *Will fill in* |
 
 ## Design decisions
 

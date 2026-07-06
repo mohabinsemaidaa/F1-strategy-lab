@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: f1strategy
+Version: 0.1.0
+Summary: Tyre degradation modelling and pit strategy simulation for Formula 1
+Requires-Python: >=3.10

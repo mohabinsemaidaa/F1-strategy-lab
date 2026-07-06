@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/f1strategy/__init__.py
+src/f1strategy/data.py
+src/f1strategy.egg-info/PKG-INFO
+src/f1strategy.egg-info/SOURCES.txt
+src/f1strategy.egg-info/dependency_links.txt
+src/f1strategy.egg-info/top_level.txt
