@@ -4,6 +4,7 @@
 
 ![tests](https://github.com/mohabinsemaidaa/f1-strategy-lab/actions/workflows/tests.yml/badge.svg)
 
+[![Live demo](https://img.shields.io/badge/demo-live%20on%20Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://personalf1project.streamlit.app/)
 Given a circuit, a team and track conditions, this project answers the question every F1 pit wall
 faces on Sunday: **when should we stop, and which tyres should we bolt on?**
 
@@ -12,9 +13,13 @@ temperature from real race data (via [FastF1](https://github.com/theOehrly/Fast-
 simulator then searches hundreds of 1-stop and 2-stop plans and ranks them by predicted total
 race time — all explorable in an interactive Streamlit dashboard.
 
-## Demo
 
-*(screenshot of the dashboard goes here — add after first run)*
+
+## 🔴 Live demo
+
+**Try it here: [personalf1project.streamlit.app](https://personalf1project.streamlit.app/)** —
+pick a Grand Prix, drag the pit-loss slider and watch the optimal strategy flip between
+one-stop and two-stop.
 
 ## How it works
 
