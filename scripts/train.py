@@ -5,8 +5,11 @@ Usage:
 """
 
 import json
+import sys
 from pathlib import Path
 import pandas as pd
+# Make the src/ package importable without needing an editable install.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from f1strategy.features import build_dataset, dataset_metadata
 from f1strategy.model import MODEL_PATH, cross_validate, save_model, train_final
 
