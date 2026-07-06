@@ -14,13 +14,13 @@ temperature from real race data (via [FastF1](https://github.com/theOehrly/Fast-
 simulator then searches hundreds of 1-stop and 2-stop plans and ranks them by predicted total
 race time — all explorable in an interactive Streamlit dashboard.
 
-
-
 ## 🔴 Live demo
 
 **Try it here: [personalf1project.streamlit.app](https://personalf1project.streamlit.app/)** —
 pick a Grand Prix, drag the pit-loss slider and watch the optimal strategy flip between
 one-stop and two-stop.
+
+![dashboard](docs/Dashboard.png)
 
 ## How it works
 
