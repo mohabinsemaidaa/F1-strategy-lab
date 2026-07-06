@@ -1,0 +1,21 @@
+# Data & caches — never commit raw data or the FastF1 cache
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environments & secrets
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# OS / editor noise
+.DS_Store
+.vscode/
+.idea/
+
+# Large regenerable artifacts (uncomment if your model file is big)
+# models/*.joblib
